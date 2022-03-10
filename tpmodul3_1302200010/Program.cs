@@ -26,6 +26,48 @@ namespace tpmodul3_1302200010
             }
             return hasil;
         }
+    }
+    enum State {Terkunci, Terbuka, Keluar };
+    class DoorMachine
+    {
+        public static void doorMachine()
+        {
+            State state = State.Terkunci;
+            string[] screenName = { "Terkunci", "Terbuka", "Keluar"};
+            while (state != State.Keluar)
+            {
+                Console.WriteLine("Pintu " + screenName[(int)state]);
+                Console.Write("Enter Command : ");
+                string command = Console.ReadLine();
+                switch (state)
+                {
+                    case State.Terkunci:
+                        if (command == "Kunci Pintu")
+                            state = State.Terkunci;
+                        else if (command == "Buka Pintu")
+                            state = State.Terbuka;
+                        else if (command == "Keluar")
+                            state = State.Keluar;
+                        else
+                            state = State.Terkunci;
+                        break;
+                    case State.Terbuka:
+                        if (command == "Buka Pintu")
+                            state = State.Terbuka;
+                        else if (command == "Kunci Pintu")
+                            state = State.Terkunci;
+                        else if (command == "Keluar")
+                            state = State.Keluar;
+                        else
+                            state = State.Terbuka;
+                        break;
+                    case State.Keluar:
+                        break;
+                }
+            }
+            Console.WriteLine("Anda Keluar");
+        }
+        
     }
     class Program
     {
@@ -36,6 +78,8 @@ namespace tpmodul3_1302200010
             Console.Write("Kode Pos                 : ");
             Console.WriteLine(KodePos.getKodePos(kalurahan));
 
+            Console.WriteLine();
+            DoorMachine.doorMachine();
             Console.ReadKey();
         }
         
